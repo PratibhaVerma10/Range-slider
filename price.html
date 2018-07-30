@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+<style type="text/css">
+    #slider-container {
+    width:350px;
+    margin-left:30px;
+}
+  </style>
+  
+<script type="text/javascript">
+
+    $(window).load(function(){
+      
+$(function () {
+      $('#slider-container').slider({
+          range: true,
+          min: 299,
+          max: 1099,
+          values: [299, 1099],
+          create: function() {
+              $("#amount").val("$299 - $1099");
+          },
+          slide: function (event, ui) {
+              $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+              var mi = ui.values[0];
+              var mx = ui.values[1];
+              filterSystem(mi, mx);
+          }
+      })
+});
+
+  function filterSystem(minPrice, maxPrice) {
+      $("#computers div.system").hide().filter(function () {
+          var price = parseInt($(this).data("price"), 10);
+          return price >= minPrice && price <= maxPrice;
+      }).show();
+  }
+
+    });
+</script>
+
+</head>
+
+<body>
+  <div id="slider-container" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0%; width: 99.875%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 99.875%;"></a></div>
+<p>
+    <label for="amount">Price range:</label>
+    <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;">
+</p>
+<div id="computers">
+    <div class="system" data-price="299" style="display: block;">div1 - 299</div>
+    <div class="system" data-price="599" style="display: block;">div2 - 599</div>
+    <div class="system" data-price="1099" style="display: none;">div3 - 1099</div>
+</div>
+<div id="slider-range"></div>
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "bZmJ8"
+      }], "*")
+    }
+  </script>
+
+
+</body>
+  </html>

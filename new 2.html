@@ -1,0 +1,87 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+      <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css">
+	  
+  <style type="text/css">
+  
+    #slider-container {
+    width:350px;
+    margin-left:30px;
+}
+  </style>
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">
+
+
+    $(window).load(function(){
+      
+$(function () {
+      $('#slider-container').slider({
+          range: true,
+          min: 299,
+          max: 1099,
+          values: [299, 1099],
+          create: function() {
+              $("#amount").val("$299 - $1099");
+          },
+          slide: function (event, ui) {
+              $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+              var mi = ui.values[0];
+              var mx = ui.values[1];
+              filterSystem(mi, mx);
+          }
+      })
+});
+
+  function filterSystem(minPrice, maxPrice) {
+      $("#computers div.system").hide().filter(function () {
+          var price = parseInt($(this).data("price"), 10);
+          return price >= minPrice && price <= maxPrice;
+      }).show();
+  }
+
+    });
+
+</script>
+
+</head>
+<body>
+  <div id="slider-container" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+  <div class="ui-slider-range ui-widget-header" style="left: 15.75%; width: 72.75%;"></div>
+  <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 10.75%;"></a>
+  <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 88.5%;"></a></div>
+<p>
+    <label for="amount">Price range:</label>
+    <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;">
+</p>
+<div id="computers">
+    <div class="system" data-price="299" style="display: none;">div1 - 299</div>
+    <div class="system" data-price="599" style="display: block;">div2 - 599</div>
+    <div class="system" data-price="1099" style="display: none;">div3 - 1099</div>
+</div>
+<div id="slider-range"></div>
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "bZmJ8"
+      }], "*")
+    }
+  </script>
+
+
+</body></html>
